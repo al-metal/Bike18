@@ -36,7 +36,7 @@ namespace Bike18
             return otv;
         }
 
-        public CookieContainer cookieNethouse(string login, string password)
+        public CookieContainer CookieNethouse(string login, string password)
         {
             CookieContainer cookie = new CookieContainer();
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("https://nethouse.ru/signin");
@@ -54,7 +54,7 @@ namespace Bike18
             return cookie;
         }
 
-        internal List<string> getProductList(CookieContainer cookie, string urlTovar)
+        internal List<string> GetProductList(CookieContainer cookie, string urlTovar)
         {
             List<string> listTovar = new List<string>();
             string otv = PostRequest(cookie, urlTovar);
@@ -208,7 +208,7 @@ namespace Bike18
             return listTovar;
         }
 
-        internal void deleteProduct(CookieContainer cookie, List<string> getProduct)
+        internal void DeleteProduct(CookieContainer cookie, List<string> getProduct)
         {
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("http://bike18.nethouse.ru/api/catalog/deleteproduct");
             req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
@@ -225,9 +225,9 @@ namespace Bike18
             StreamReader ressr1 = new StreamReader(res1.GetResponseStream());
         }
 
-        internal void deleteProduct(CookieContainer cookie, string url)
+        internal void DeleteProduct(CookieContainer cookie, string url)
         {
-            List<string> getProduct = getProductList(cookie, url);
+            List<string> getProduct = GetProductList(cookie, url);
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("http://bike18.nethouse.ru/api/catalog/deleteproduct");
             req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
             req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:44.0) Gecko/20100101 Firefox/44.0";
