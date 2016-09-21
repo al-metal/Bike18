@@ -4,12 +4,38 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Bike18
 {
     class nethouse
     {
+        public string PostRequest(CookieContainer cookie, string url)
+        {
+            string otv = null;
+            HttpWebResponse res = null;
+
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
+            req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+            req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36";
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.CookieContainer = cookie;
+            try
+            {
+                res = (HttpWebResponse)req.GetResponse();
+                StreamReader ressr = new StreamReader(res.GetResponseStream());
+                otv = ressr.ReadToEnd();
+            }
+            catch (WebException e)
+            {
+                otv = "";
+            }
+
+            return otv;
+        }
+
         public CookieContainer cookieNethouse(string login, string password)
         {
             CookieContainer cookie = new CookieContainer();
@@ -27,5 +53,7 @@ namespace Bike18
             HttpWebResponse res = (HttpWebResponse)req.GetResponse();
             return cookie;
         }
+
+        
     }
 }
