@@ -243,6 +243,18 @@ namespace Bike18
             StreamReader ressr1 = new StreamReader(res1.GetResponseStream());
         }
 
-        
+        internal void TovarWriteInCSV(List<string> newProduct, string nameFile)
+        {
+            StreamWriter newProductcsv = new StreamWriter(nameFile + ".csv", true, Encoding.GetEncoding("windows-1251"));
+            int count = newProduct.Count - 1;
+            for (int i = 0; count > i; i++)
+            {
+                newProductcsv.Write(newProduct[i], Encoding.GetEncoding("windows-1251"));
+                newProductcsv.Write(";");
+            }
+            newProductcsv.Write(newProduct[count], Encoding.GetEncoding("windows-1251"));
+            newProductcsv.WriteLine();
+            newProductcsv.Close();
+        }
     }
 }
