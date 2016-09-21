@@ -256,5 +256,14 @@ namespace Bike18
             newProductcsv.WriteLine();
             newProductcsv.Close();
         }
+
+        internal int ReturnPrice(double priceTovar, double discount)
+        {
+            priceTovar = priceTovar - (priceTovar * discount);
+            priceTovar = Math.Round(priceTovar);
+            int price = Convert.ToInt32(priceTovar);
+            price = (price / 10) * 10;
+            return price;
+        }
     }
 }
