@@ -35,6 +35,9 @@ namespace Bike18
 
         public List<string> GetProductList(CookieContainer cookie, string urlTovar)
         {
+            if(!urlTovar.Contains("nethouse"))
+                urlTovar = urlTovar.Replace("http://bike18.ru/", "http://bike18.nethouse.ru/");
+
             List<string> listTovar = new List<string>();
             string otv = webRequest.PostRequest(cookie, urlTovar);
             if (otv != null)
