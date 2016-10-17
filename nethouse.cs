@@ -391,7 +391,7 @@ namespace Bike18
             return addCount;
         }
 
-        private List<string> NewListUploadinBike18(string nameFile)
+        private void NewListUploadinBike18(string nameFile)
         {
             List<string> newProduct = new List<string>();
             newProduct.Add("id");                                                                               //id
@@ -414,7 +414,6 @@ namespace Bike18
             newProduct.Add("Показывать на сайте *");                                           //показывать
             newProduct.Add("Удалить *");                                    //удалить
             WriteFileInCSV(newProduct, nameFile);
-            return newProduct;
         }
 
         public string DownloadImages(CookieContainer cookie, string artProd)
