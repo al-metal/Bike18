@@ -339,28 +339,28 @@ namespace Bike18
 
         public void ErrCHPUUploadInBike18(string otvimg)
         {
-            string errstr = new Regex("(?<=errorLine\":).*?(?=,\")").Match(otvimg).ToString();
-            string[] naSite = File.ReadAllLines("naSite.csv", Encoding.GetEncoding(1251));
-            int u = Convert.ToInt32(errstr) - 1;
-            string[] strslug3 = naSite[u].ToString().Split(';');
-            string strslug = strslug3[strslug3.Length - 5];
-            int slug = strslug.Length;
-            int countAdd = ReturnCountAdd();
-            int countDel = countAdd.ToString().Length;
-            if (strslug.Contains("\""))
-            {
-                countDel = countDel + 2;
-            }
-            string strslug2 = strslug.Remove(slug - countDel);
-            strslug2 += countAdd;
-            strslug2 = strslug2.Replace("”", "").Replace("~", "").Replace("#", "");
-            if (strslug2.Contains("\""))
-            {
-                strslug2 = strslug2 + "\"";
-                countDel = countDel - 2;
-            }
-            naSite[u] = naSite[u].Replace(strslug, strslug2);
-            File.WriteAllLines("naSite.csv", naSite, Encoding.GetEncoding(1251));
+                string errstr = new Regex("(?<=errorLine\":).*?(?=,\")").Match(otvimg).ToString();
+                string[] naSite = File.ReadAllLines("naSite.csv", Encoding.GetEncoding(1251));
+                int u = Convert.ToInt32(errstr) - 1;
+                string[] strslug3 = naSite[u].ToString().Split(';');
+                string strslug = strslug3[strslug3.Length - 5];
+                int slug = strslug.Length;
+                int countAdd = ReturnCountAdd();
+                int countDel = countAdd.ToString().Length;
+                if (strslug.Contains("\""))
+                {
+                    countDel = countDel + 2;
+                }
+                string strslug2 = strslug.Remove(slug - countDel);
+                strslug2 += countAdd;
+                strslug2 = strslug2.Replace("”", "").Replace("~", "").Replace("#", "");
+                if (strslug2.Contains("\""))
+                {
+                    strslug2 = strslug2 + "\"";
+                    countDel = countDel - 2;
+                }
+                naSite[u] = naSite[u].Replace(strslug, strslug2);
+                File.WriteAllLines("naSite.csv", naSite, Encoding.GetEncoding(1251));
         }
 
         public int ReturnCountAdd()
@@ -491,14 +491,23 @@ namespace Bike18
             string errstr = new Regex("(?<=errorLine\":).*?(?=,\")").Match(otv).ToString();
             string[] naSite = File.ReadAllLines(nameFile, Encoding.GetEncoding(1251));
             int u = Convert.ToInt32(errstr) - 1;
-            string[] strslug3 = naSite[u].Split(';');
-            int slugint = strslug3.Length - 5;
-            string strslug = strslug3[slugint].ToString();
+            string[] strslug3 = naSite[u].ToString().Split(';');
+            string strslug = strslug3[strslug3.Length - 5];
             int slug = strslug.Length;
             int countAdd = ReturnCountAdd();
             int countDel = countAdd.ToString().Length;
+            if (strslug.Contains("\""))
+            {
+                countDel = countDel + 2;
+            }
             string strslug2 = strslug.Remove(slug - countDel);
             strslug2 += countAdd;
+            strslug2 = strslug2.Replace("”", "").Replace("~", "").Replace("#", "");
+            if (strslug2.Contains("\""))
+            {
+                strslug2 = strslug2 + "\"";
+                countDel = countDel - 2;
+            }
             naSite[u] = naSite[u].Replace(strslug, strslug2);
             File.WriteAllLines(nameFile, naSite, Encoding.GetEncoding(1251));
         }
