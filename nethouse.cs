@@ -337,7 +337,7 @@ namespace Bike18
         }
 
         #region Загрузка картинки товара на сайта Bike18.ru
-        private void UploadImage(CookieContainer cookieBike18, string urlProduct)
+        public void UploadImage(CookieContainer cookieBike18, string urlProduct)
         {
             string otv = null;
             urlProduct = urlProduct.Replace("http://bike18.ru", "http://bike18.nethouse.ru");
@@ -392,7 +392,7 @@ namespace Bike18
             resimg.Close();
             string urlSaveImg = new Regex("(?<=url\":\").*?(?=\")").Match(otvimg).Value.Replace("\\/", "%2F");
 
-            req = (HttpWebRequest)HttpWebRequest.Create("http://bike18.nethouse.ru/api/catalog/save-image");
+            req = (HttpWebRequest)HttpWebRequest.Create("https://bike18.nethouse.ru/api/catalog/save-image");
             req.Accept = "application/json, text/plain, */*";
             req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36";
             req.Method = "POST";
